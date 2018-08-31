@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Requisição</title>
+    <script src="jquery.js"></script>
+    <script>
+        $(function(){
+            $.ajax({//ajax serve para consumir serviçoes sem ter que acessar as páginas
+                url:'texto.txt', //
+                success:function(response){//response é uma variável
+                    console.log(response);
+                    alert('encontrou!');
+                    $('h1').after(response); /*Inserindo o conteúdo do response após a tag <h1>*/
+                },
+                error:function(){
+                    alert('Ocorreu um erro!');
+                }
+            }); 
+
+        });
+    </script>
+</head>
+<body>
+    <h1> Ajax - Asynchronous JavaScript and XML</h1>
+    <p>
+        Técnica de desenvolvimento web que permite a criação de 
+        aplicações mais interativas. Tornar páginas web mais 
+        rapidas pela troca de pequenas quantidades de informação.
+    </p>
+    <p>
+        Evita que uma página inteira seja carregtada cada vez que 
+        alguma nova informação precisa ser consultada no servidor.
+    </p>
+</body>
+</html>
