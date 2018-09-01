@@ -10,14 +10,64 @@
             $.ajax({//ajax serve para consumir serviçoes sem ter que acessar as páginas
                 url:'texto.txt', //
                 success:function(response){//response é uma variável
-                    console.log(response);
-                    alert('encontrou!');
+                    //console.log(response);
+                    //alert('encontrou!');
                     $('h1').after(response); /*Inserindo o conteúdo do response após a tag <h1>*/
                 },
                 error:function(){
                     alert('Ocorreu um erro!');
                 }
             }); 
+
+            //ajax consulta html
+            $.ajax({//ajax serve para consumir serviçoes sem ter que acessar as páginas
+                url:'texto.html', //
+                success:function(response){//response é uma variável
+                    //console.log(response);
+                    //alert('encontrou!');
+                    $('h1').after(response); /*Inserindo o conteúdo do response após a tag <h1>*/
+                },
+                error:function(){
+                    alert('Ocorreu um erro!');
+                }
+            }); 
+
+            //ajax consulta json
+            $.ajax({//ajax serve para consumir serviçoes sem ter que acessar as páginas
+                url:'texto.json',
+                success:function(response){//response é uma variável
+                // response é um array JSON com objetos
+                //$.each vai inteirar esse array
+                    $.each(response,function(indice, obj){
+                        $('#listaUsuarios').append('<li>'+obj.nome+'</li>');
+                    });
+                    console.log(response);
+                    //alert('encontrou!');
+                    $('h1').after(response); /*Inserindo o conteúdo do response após a tag <h1>*/
+                },
+                error:function(){
+                    alert('Ocorreu um erro!');
+                }
+            }); 
+
+            //Consumir uma api de um site. EX: ViaCEP
+            //blur quando clica fora do campo
+            $('#cep').blur(function(){
+                $.ajax({
+                    url: "viacep.com.br/ws/72215000/json/",
+                    success:function(response){
+                        //console.log(response.logradouro);
+                        $('#endereco').html(response.logradouro + ' ' + response.complemento + ' ' +
+                            response.bairro + ' ' +
+                            response.localidade + ' ' +
+                            response.uf + ' ' +
+                            response.unidade)                      
+                        },
+                    error:function(){
+                        alert('não foi possível ober conexão com o servidor')
+                    }
+                });
+            });
 
         });
     </script>
@@ -33,5 +83,22 @@
         Evita que uma página inteira seja carregtada cada vez que 
         alguma nova informação precisa ser consultada no servidor.
     </p>
+
+    <div>
+        <h2>Lista de usuários</h2>
+        <ul id="listaUsuarios">
+            <li> </li>
+            <li> </li>
+            <li> </li>
+            
+        </ul>
+    </div>
+
+    <h2>Endereço via CEP </h2>
+    <input type="text" name="cep" id="cep" maxlength="8" placeholder="Digite um cep"> <br>
+
+    <span id="endereco">
+    </span>
+
 </body>
 </html>

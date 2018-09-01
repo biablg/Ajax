@@ -1,1 +1,1 @@
-Texto utilizando a função $.ajax()
+Arquivo TEXTO.TXT - Texto utilizando a função $.ajax()
